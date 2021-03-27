@@ -1,0 +1,9 @@
+.reviewsTitle {
+  text-align: center;
+}
+.reviewsList {
+  list-style: none;
+}
+.reviewsList > li {
+  margin-bottom: 10px;
+}

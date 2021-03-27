@@ -1,0 +1,27 @@
+.navLinks {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+  font-size: 30px;
+}
+.navLinks:not(:last-child) {
+  margin-right: 30px;
+}
+
+.navLinksActive {
+  color: brown;
+}
+.detailsContainer {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 20px;
+  display: flex;
+}
+.imgMovies {
+  margin-right: 30px;
+}
+.detailsNacLinks {
+  background-color: gainsboro;
+  text-align: center;
+}

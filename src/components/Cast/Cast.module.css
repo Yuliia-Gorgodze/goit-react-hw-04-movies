@@ -1,0 +1,13 @@
+.castListActors {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.actorsCard {
+  width: 110px;
+}
+.actorsCard:not(:last-child) {
+  margin-right: 15px;
+  margin-bottom: 10px;
+}

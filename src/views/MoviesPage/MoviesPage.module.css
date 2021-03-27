@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+}
+.form > label {
+  margin-top: 30px;
+}
+.form > label > input {
+  width: 250px;
+  padding: 5px;
+}
