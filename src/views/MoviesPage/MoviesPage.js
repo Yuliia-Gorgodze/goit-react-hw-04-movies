@@ -1,6 +1,6 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { Route } from 'react-router-dom';
-import Fetch from '../../components/Fetch';
+import Fetch from '../../Api/Fetch';
 
 const MoviesList = lazy(() =>
   import(

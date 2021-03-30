@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import shortId from 'shortid';
-import Fetch from '../Fetch';
+import Fetch from '../../Api/Fetch';
 import style from './Reviews.module.css';
 class Reviews extends Component {
   state = {
     reviews: [],
   };
   componentDidMount() {
-    Fetch.getReviewsDetails(this.props.match.params.movieId).then(reviews => {
-      this.setState({ reviews: reviews.results });
-    });
+    Fetch.getReviewsDetails(this.props.match.params.movieId)
+      .then(reviews => {
+        if (reviews.results) {
+          this.setState({ reviews: reviews.results });
+        }
+      })
+      .catch(error => console.log('ERRO$'));
   }
   render() {
     const { reviews } = this.state;

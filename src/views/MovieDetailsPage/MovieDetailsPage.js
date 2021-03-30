@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Route, NavLink } from 'react-router-dom';
-import Cast from '../Cast/Cast';
 import style from './MoviesDetails.module.css';
-import Reviews from '../Reviews/Reviews';
-import Fetch from '../Fetch';
-import img from '../Cast/actor.png';
+import Fetch from '../../Api/Fetch';
+import img from '../../components/Cast/actor.png';
+
+const Reviews = lazy(() =>
+  import('../../components/Reviews/Reviews' /*WebpackChunkName: "Reviews"*/),
+);
+const Cast = lazy(() =>
+  import('../../components/Cast/Cast' /*WebpackChunkName: "Cast"*/),
+);
 
 class MoviesDetailsPage extends Component {
   state = {
@@ -12,7 +17,7 @@ class MoviesDetailsPage extends Component {
   };
   componentDidMount() {
     Fetch.movieDetails(this.props.match.params.movieId).then(data =>
-      this.setState({ movie: data }),
+      this.setState({ movie: data }).catch(error => console.log('ERRO$')),
     );
   }
   render() {
@@ -70,7 +75,12 @@ class MoviesDetailsPage extends Component {
             className={style.navLinks}
             activeClassName={style.navLinksActive}
             exact
-            to={`${this.props.match.url}/cast`}
+            to={{
+              pathname: `${this.props.match.url}/cast`,
+              state: {
+                from: this.props.location,
+              },
+            }}
           >
             Cast
           </NavLink>
@@ -78,12 +88,16 @@ class MoviesDetailsPage extends Component {
             className={style.navLinks}
             activeClassName={style.navLinksActive}
             exact
-            to={`${this.props.match.url}/reviews`}
+            to={{
+              pathname: `${this.props.match.url}/reviews`,
+              state: {
+                from: this.props.location,
+              },
+            }}
           >
             Reviews
           </NavLink>
         </div>
-
         <Route
           path={`${this.props.match.path}/cast`}
           render={props => <Cast {...props} movie={this.state.movie} />}

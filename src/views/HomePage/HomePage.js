@@ -1,26 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 
-import Fetch from '../../components/Fetch';
-import MoviesList from '../../components/HomePageMoviesList/HomePageMoviesList';
+import Fetch from '../../Api/Fetch';
+
+const MoviesList = lazy(() =>
+  import(
+    '../../components/HomePageMoviesList/HomePageMoviesList' /*WebpackChunkName: "MoviesList"*/
+  ),
+);
+
 class HomePage extends Component {
   state = {
     moviesList: [],
   };
   componentDidMount() {
-    Fetch.getFilmWeek().then(data => {
-      if (data.results.length !== 0) {
-        this.setState({ moviesList: data.results });
-      }
-    });
+    Fetch.getFilmWeek()
+      .then(data => {
+        if (data.results.length !== 0) {
+          this.setState({ moviesList: data.results });
+        }
+      })
+      .catch(error => console.log('ERRO$'));
   }
   render() {
     return (
-      <>
-        <MoviesList
-          moviesList={this.state?.moviesList}
-          location={this.props.location}
-        />
-      </>
+      <Suspense>
+        <>
+          <MoviesList
+            moviesList={this.state?.moviesList}
+            location={this.props.location}
+          />
+        </>
+      </Suspense>
     );
   }
 }
