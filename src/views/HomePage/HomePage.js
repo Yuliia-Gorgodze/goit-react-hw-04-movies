@@ -19,7 +19,7 @@ class HomePage extends Component {
           this.setState({ moviesList: data.results });
         }
       })
-      .catch(error => console.log('ERRO$'));
+      .catch(console.error('eror'));
   }
   render() {
     return (

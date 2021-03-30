@@ -16,9 +16,9 @@ class MoviesDetailsPage extends Component {
     movie: {},
   };
   componentDidMount() {
-    Fetch.movieDetails(this.props.match.params.movieId).then(data =>
-      this.setState({ movie: data }).catch(error => console.log('ERRO$')),
-    );
+    Fetch.movieDetails(this.props.match.params.movieId)
+      .then(data => this.setState({ movie: data }))
+      .catch(console.error('eror'));
   }
   render() {
     const {

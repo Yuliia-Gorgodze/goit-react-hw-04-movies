@@ -38,9 +38,7 @@ class MoviesPage extends Component {
       .then(data => {
         this.setState({ movie: data });
       })
-      .catch(error => {
-        console.log('error');
-      });
+      .catch(console.error('eror'));
   }
 
   onSubmitForm = currentQuery => {

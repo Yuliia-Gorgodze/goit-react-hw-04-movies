@@ -8,11 +8,13 @@ class Cast extends Component {
     actor: [],
   };
   componentDidMount() {
-    Fetch.getMovieList(this.props.match.params.movieId).then(actors => {
-      if (actors) {
-        this.setState({ actor: actors });
-      }
-    });
+    Fetch.getMovieList(this.props.match.params.movieId)
+      .then(actors => {
+        if (actors) {
+          this.setState({ actor: actors });
+        }
+      })
+      .catch(console.error('eror'));
   }
   render() {
     const { actor } = this.state;
