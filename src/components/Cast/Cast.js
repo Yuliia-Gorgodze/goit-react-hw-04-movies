@@ -14,7 +14,7 @@ class Cast extends Component {
           this.setState({ actor: actors });
         }
       })
-      .catch(console.error('eror'));
+      .catch(error => console.error(error));
   }
   render() {
     const { actor } = this.state;

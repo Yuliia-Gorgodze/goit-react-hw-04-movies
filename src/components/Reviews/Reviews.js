@@ -13,7 +13,7 @@ class Reviews extends Component {
           this.setState({ reviews: reviews.results });
         }
       })
-      .catch(console.error('eror'));
+      .catch(error => console.error(error));
   }
   render() {
     const { reviews } = this.state;

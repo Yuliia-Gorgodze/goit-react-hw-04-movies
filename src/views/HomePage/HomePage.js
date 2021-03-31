@@ -15,15 +15,13 @@ class HomePage extends Component {
   componentDidMount() {
     Fetch.getFilmWeek()
       .then(data => {
-        if (data.results.length !== 0) {
-          this.setState({ moviesList: data.results });
-        }
+        this.setState({ moviesList: data.results });
       })
-      .catch(console.error('eror'));
+      .catch(error => console.error(error));
   }
   render() {
     return (
-      <Suspense>
+      <Suspense fallback={<span>Loading...</span>}>
         <>
           <MoviesList
             moviesList={this.state?.moviesList}

@@ -38,7 +38,7 @@ class MoviesPage extends Component {
       .then(data => {
         this.setState({ movie: data });
       })
-      .catch(console.error('eror'));
+      .catch(error => console.error(error));
   }
 
   onSubmitForm = currentQuery => {
@@ -54,17 +54,17 @@ class MoviesPage extends Component {
 
     return (
       <div>
-        <Form onSubmit={this.onSubmitForm} />
-        <div>
-          {movie && (
-            <Suspense fallback={<span>Loading...</span>}>
+        <Suspense fallback={<span>Loading...</span>}>
+          <Form onSubmit={this.onSubmitForm} />
+          <div>
+            {movie && (
               <Route
                 to={`/movies/query=${query}`}
                 render={props => <MoviesList movies={movie} {...props} />}
               />
-            </Suspense>
-          )}
-        </div>
+            )}
+          </div>
+        </Suspense>
       </div>
     );
   }

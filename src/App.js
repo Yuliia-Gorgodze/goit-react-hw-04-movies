@@ -30,6 +30,7 @@ const App = () => (
           path={routes.moviewsPageDetails}
           component={MoviesPageDetailsViews}
         />
+        <Route component={HomeViews}></Route>
       </Switch>
     </Suspense>
   </>

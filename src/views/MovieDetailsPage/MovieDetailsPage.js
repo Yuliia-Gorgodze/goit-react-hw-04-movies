@@ -1,4 +1,4 @@
-import React, { Component, lazy } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import style from './MoviesDetails.module.css';
 import Fetch from '../../Api/Fetch';
@@ -18,7 +18,7 @@ class MoviesDetailsPage extends Component {
   componentDidMount() {
     Fetch.movieDetails(this.props.match.params.movieId)
       .then(data => this.setState({ movie: data }))
-      .catch(console.error('eror'));
+      .catch(error => console.error(error));
   }
   render() {
     const {
@@ -98,11 +98,17 @@ class MoviesDetailsPage extends Component {
             Reviews
           </NavLink>
         </div>
-        <Route
-          path={`${this.props.match.path}/cast`}
-          render={props => <Cast {...props} movie={this.state.movie} />}
-        />
-        <Route path={`${this.props.match.path}/reviews`} component={Reviews} />
+
+        <Suspense fallback={<span>Loading...</span>}>
+          <Route
+            path={`${this.props.match.path}/cast`}
+            render={props => <Cast {...props} movie={this.state.movie} />}
+          />
+          <Route
+            path={`${this.props.match.path}/reviews`}
+            component={Reviews}
+          />
+        </Suspense>
       </>
     );
   }
