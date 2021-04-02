@@ -20,6 +20,15 @@ class MoviesDetailsPage extends Component {
       .then(data => this.setState({ movie: data }))
       .catch(error => console.error(error));
   }
+  BackBtn = () => {
+    const { history, location } = this.props;
+
+    if (location.state && location.state.from) {
+      return history.push(location.state.from);
+    }
+
+    history.push('/');
+  };
   render() {
     const {
       original_title,
@@ -32,13 +41,7 @@ class MoviesDetailsPage extends Component {
 
     return (
       <>
-        <button
-          onClick={() =>
-            this.props.history.push(this.props.location.state.from)
-          }
-          className="buttonBack"
-          type="button"
-        >
+        <button onClick={this.BackBtn} className="buttonBack" type="button">
           back
         </button>
         <div className={style.detailsContainer}>
@@ -99,16 +102,11 @@ class MoviesDetailsPage extends Component {
           </NavLink>
         </div>
 
-        <Suspense fallback={<span>Loading...</span>}>
-          <Route
-            path={`${this.props.match.path}/cast`}
-            render={props => <Cast {...props} movie={this.state.movie} />}
-          />
-          <Route
-            path={`${this.props.match.path}/reviews`}
-            component={Reviews}
-          />
-        </Suspense>
+        <Route
+          path={`${this.props.match.path}/cast`}
+          render={props => <Cast {...props} movie={this.state.movie} />}
+        />
+        <Route path={`${this.props.match.path}/reviews`} component={Reviews} />
       </>
     );
   }
