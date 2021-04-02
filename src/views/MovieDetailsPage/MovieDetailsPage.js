@@ -81,7 +81,7 @@ class MoviesDetailsPage extends Component {
             to={{
               pathname: `${this.props.match.url}/cast`,
               state: {
-                from: this.props.location,
+                ...this.props.location.state,
               },
             }}
           >
@@ -93,9 +93,7 @@ class MoviesDetailsPage extends Component {
             exact
             to={{
               pathname: `${this.props.match.url}/reviews`,
-              state: {
-                from: this.props.location,
-              },
+              state: { ...this.props.location.state },
             }}
           >
             Reviews
